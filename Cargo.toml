@@ -1,0 +1,10 @@
+[package]
+name = "sixel-3d"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+sixel_rs = { package = "sixel", path = "./deps/sixel-rs" }
+sixel-sys = "0.3.1"
+embedded-graphics = "0.8.1"
+wavefront = "0.2.3"
