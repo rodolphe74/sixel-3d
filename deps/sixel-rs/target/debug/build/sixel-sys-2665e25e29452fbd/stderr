@@ -1,0 +1,261 @@
+configure: WARNING: unrecognized options: --without-python
+configure: WARNING: unrecognized options: --without-python
+In file included from loader.c:120:
+stb_image.h: In function ‘stbi__convert_format’:
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1364:10: note: in expansion of macro ‘CASE’
+ 1364 |          CASE(1,2) dest[0]=src[0], dest[1]=255; break;
+      |          ^~~~
+stb_image.h:1364:49: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1364 |          CASE(1,2) dest[0]=src[0], dest[1]=255; break;
+      |                                                 ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1365:10: note: in expansion of macro ‘CASE’
+ 1365 |          CASE(1,3) dest[0]=dest[1]=dest[2]=src[0]; break;
+      |          ^~~~
+stb_image.h:1365:52: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1365 |          CASE(1,3) dest[0]=dest[1]=dest[2]=src[0]; break;
+      |                                                    ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1366:10: note: in expansion of macro ‘CASE’
+ 1366 |          CASE(1,4) dest[0]=dest[1]=dest[2]=src[0], dest[3]=255; break;
+      |          ^~~~
+stb_image.h:1366:65: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1366 |          CASE(1,4) dest[0]=dest[1]=dest[2]=src[0], dest[3]=255; break;
+      |                                                                 ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1367:10: note: in expansion of macro ‘CASE’
+ 1367 |          CASE(2,1) dest[0]=src[0]; break;
+      |          ^~~~
+stb_image.h:1367:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1367 |          CASE(2,1) dest[0]=src[0]; break;
+      |                                    ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1368:10: note: in expansion of macro ‘CASE’
+ 1368 |          CASE(2,3) dest[0]=dest[1]=dest[2]=src[0]; break;
+      |          ^~~~
+stb_image.h:1368:52: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1368 |          CASE(2,3) dest[0]=dest[1]=dest[2]=src[0]; break;
+      |                                                    ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1369:10: note: in expansion of macro ‘CASE’
+ 1369 |          CASE(2,4) dest[0]=dest[1]=dest[2]=src[0], dest[3]=src[1]; break;
+      |          ^~~~
+stb_image.h:1369:68: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1369 |          CASE(2,4) dest[0]=dest[1]=dest[2]=src[0], dest[3]=src[1]; break;
+      |                                                                    ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1370:10: note: in expansion of macro ‘CASE’
+ 1370 |          CASE(3,4) dest[0]=src[0],dest[1]=src[1],dest[2]=src[2],dest[3]=255; break;
+      |          ^~~~
+stb_image.h:1370:78: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1370 |          CASE(3,4) dest[0]=src[0],dest[1]=src[1],dest[2]=src[2],dest[3]=255; break;
+      |                                                                              ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1371:10: note: in expansion of macro ‘CASE’
+ 1371 |          CASE(3,1) dest[0]=stbi__compute_y(src[0],src[1],src[2]); break;
+      |          ^~~~
+stb_image.h:1371:67: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1371 |          CASE(3,1) dest[0]=stbi__compute_y(src[0],src[1],src[2]); break;
+      |                                                                   ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1372:10: note: in expansion of macro ‘CASE’
+ 1372 |          CASE(3,2) dest[0]=stbi__compute_y(src[0],src[1],src[2]), dest[1] = 255; break;
+      |          ^~~~
+stb_image.h:1372:82: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1372 |          CASE(3,2) dest[0]=stbi__compute_y(src[0],src[1],src[2]), dest[1] = 255; break;
+      |                                                                                  ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1373:10: note: in expansion of macro ‘CASE’
+ 1373 |          CASE(4,1) dest[0]=stbi__compute_y(src[0],src[1],src[2]); break;
+      |          ^~~~
+stb_image.h:1373:67: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1373 |          CASE(4,1) dest[0]=stbi__compute_y(src[0],src[1],src[2]); break;
+      |                                                                   ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1374:10: note: in expansion of macro ‘CASE’
+ 1374 |          CASE(4,2) dest[0]=stbi__compute_y(src[0],src[1],src[2]), dest[1] = src[3]; break;
+      |          ^~~~
+stb_image.h:1374:85: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1374 |          CASE(4,2) dest[0]=stbi__compute_y(src[0],src[1],src[2]), dest[1] = src[3]; break;
+      |                                                                                     ^~~~~
+stb_image.h:1360:44: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 1360 |       #define CASE(a,b)   case COMBO(a,b): for(i=x-1; i >= 0; --i, src += a, dest += b)
+      |                                            ^~~
+stb_image.h:1375:10: note: in expansion of macro ‘CASE’
+ 1375 |          CASE(4,3) dest[0]=src[0],dest[1]=src[1],dest[2]=src[2]; break;
+      |          ^~~~
+stb_image.h:1375:66: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 1375 |          CASE(4,3) dest[0]=src[0],dest[1]=src[1],dest[2]=src[2]; break;
+      |                                                                  ^~~~~
+stb_image.h: In function ‘stbi__build_fast_ac’:
+stb_image.h:1580:33: warning: left shift of negative value [-Wshift-negative-value]
+ 1580 |             if (k < m) k += (-1 << magbits) + 1;
+      |                                 ^~
+stb_image.h: In function ‘stbi__create_png_image_raw’:
+stb_image.h:4086:17: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4086 |                 for (k=0; k < nk; ++k)
+      |                 ^~~
+stb_image.h:4090:13: note: in expansion of macro ‘CASE’
+ 4090 |             CASE(STBI__F_sub)          cur[k] = STBI__BYTECAST(raw[k] + cur[k-filter_bytes]); break;
+      |             ^~~~
+stb_image.h:4090:95: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4090 |             CASE(STBI__F_sub)          cur[k] = STBI__BYTECAST(raw[k] + cur[k-filter_bytes]); break;
+      |                                                                                               ^~~~~
+stb_image.h:4086:17: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4086 |                 for (k=0; k < nk; ++k)
+      |                 ^~~
+stb_image.h:4091:13: note: in expansion of macro ‘CASE’
+ 4091 |             CASE(STBI__F_up)           cur[k] = STBI__BYTECAST(raw[k] + prior[k]); break;
+      |             ^~~~
+stb_image.h:4091:84: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4091 |             CASE(STBI__F_up)           cur[k] = STBI__BYTECAST(raw[k] + prior[k]); break;
+      |                                                                                    ^~~~~
+stb_image.h:4086:17: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4086 |                 for (k=0; k < nk; ++k)
+      |                 ^~~
+stb_image.h:4092:13: note: in expansion of macro ‘CASE’
+ 4092 |             CASE(STBI__F_avg)          cur[k] = STBI__BYTECAST(raw[k] + ((prior[k] + cur[k-filter_bytes])>>1)); break;
+      |             ^~~~
+stb_image.h:4092:113: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4092 |             CASE(STBI__F_avg)          cur[k] = STBI__BYTECAST(raw[k] + ((prior[k] + cur[k-filter_bytes])>>1)); break;
+      |                                                                                                                 ^~~~~
+stb_image.h:4086:17: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4086 |                 for (k=0; k < nk; ++k)
+      |                 ^~~
+stb_image.h:4093:13: note: in expansion of macro ‘CASE’
+ 4093 |             CASE(STBI__F_paeth)        cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k-filter_bytes],prior[k],prior[k-filter_bytes])); break;
+      |             ^~~~
+stb_image.h:4093:139: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4093 |             CASE(STBI__F_paeth)        cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k-filter_bytes],prior[k],prior[k-filter_bytes])); break;
+      |                                                                                                                                           ^~~~~
+stb_image.h:4086:17: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4086 |                 for (k=0; k < nk; ++k)
+      |                 ^~~
+stb_image.h:4094:13: note: in expansion of macro ‘CASE’
+ 4094 |             CASE(STBI__F_avg_first)    cur[k] = STBI__BYTECAST(raw[k] + (cur[k-filter_bytes] >> 1)); break;
+      |             ^~~~
+stb_image.h:4094:102: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4094 |             CASE(STBI__F_avg_first)    cur[k] = STBI__BYTECAST(raw[k] + (cur[k-filter_bytes] >> 1)); break;
+      |                                                                                                      ^~~~~
+stb_image.h:4086:17: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4086 |                 for (k=0; k < nk; ++k)
+      |                 ^~~
+stb_image.h:4095:13: note: in expansion of macro ‘CASE’
+ 4095 |             CASE(STBI__F_paeth_first)  cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k-filter_bytes],0,0)); break;
+      |             ^~~~
+stb_image.h:4095:112: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4095 |             CASE(STBI__F_paeth_first)  cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k-filter_bytes],0,0)); break;
+      |                                                                                                                ^~~~~
+stb_image.h:4104:20: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4104 |                    for (k=0; k < filter_bytes; ++k)
+      |                    ^~~
+stb_image.h:4106:13: note: in expansion of macro ‘CASE’
+ 4106 |             CASE(STBI__F_none)         cur[k] = raw[k]; break;
+      |             ^~~~
+stb_image.h:4106:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4106 |             CASE(STBI__F_none)         cur[k] = raw[k]; break;
+      |                                                         ^~~~~
+stb_image.h:4104:20: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4104 |                    for (k=0; k < filter_bytes; ++k)
+      |                    ^~~
+stb_image.h:4107:13: note: in expansion of macro ‘CASE’
+ 4107 |             CASE(STBI__F_sub)          cur[k] = STBI__BYTECAST(raw[k] + cur[k- output_bytes]); break;
+      |             ^~~~
+stb_image.h:4107:96: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4107 |             CASE(STBI__F_sub)          cur[k] = STBI__BYTECAST(raw[k] + cur[k- output_bytes]); break;
+      |                                                                                                ^~~~~
+stb_image.h:4104:20: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4104 |                    for (k=0; k < filter_bytes; ++k)
+      |                    ^~~
+stb_image.h:4108:13: note: in expansion of macro ‘CASE’
+ 4108 |             CASE(STBI__F_up)           cur[k] = STBI__BYTECAST(raw[k] + prior[k]); break;
+      |             ^~~~
+stb_image.h:4108:84: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4108 |             CASE(STBI__F_up)           cur[k] = STBI__BYTECAST(raw[k] + prior[k]); break;
+      |                                                                                    ^~~~~
+stb_image.h:4104:20: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4104 |                    for (k=0; k < filter_bytes; ++k)
+      |                    ^~~
+stb_image.h:4109:13: note: in expansion of macro ‘CASE’
+ 4109 |             CASE(STBI__F_avg)          cur[k] = STBI__BYTECAST(raw[k] + ((prior[k] + cur[k- output_bytes])>>1)); break;
+      |             ^~~~
+stb_image.h:4109:114: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4109 |             CASE(STBI__F_avg)          cur[k] = STBI__BYTECAST(raw[k] + ((prior[k] + cur[k- output_bytes])>>1)); break;
+      |                                                                                                                  ^~~~~
+stb_image.h:4104:20: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4104 |                    for (k=0; k < filter_bytes; ++k)
+      |                    ^~~
+stb_image.h:4110:13: note: in expansion of macro ‘CASE’
+ 4110 |             CASE(STBI__F_paeth)        cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k- output_bytes],prior[k],prior[k- output_bytes])); break;
+      |             ^~~~
+stb_image.h:4110:141: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4110 |             CASE(STBI__F_paeth)        cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k- output_bytes],prior[k],prior[k- output_bytes])); break;
+      |                                                                                                                                             ^~~~~
+stb_image.h:4104:20: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4104 |                    for (k=0; k < filter_bytes; ++k)
+      |                    ^~~
+stb_image.h:4111:13: note: in expansion of macro ‘CASE’
+ 4111 |             CASE(STBI__F_avg_first)    cur[k] = STBI__BYTECAST(raw[k] + (cur[k- output_bytes] >> 1)); break;
+      |             ^~~~
+stb_image.h:4111:103: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4111 |             CASE(STBI__F_avg_first)    cur[k] = STBI__BYTECAST(raw[k] + (cur[k- output_bytes] >> 1)); break;
+      |                                                                                                       ^~~~~
+stb_image.h:4104:20: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+ 4104 |                    for (k=0; k < filter_bytes; ++k)
+      |                    ^~~
+stb_image.h:4112:13: note: in expansion of macro ‘CASE’
+ 4112 |             CASE(STBI__F_paeth_first)  cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k- output_bytes],0,0)); break;
+      |             ^~~~
+stb_image.h:4112:113: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+ 4112 |             CASE(STBI__F_paeth_first)  cur[k] = STBI__BYTECAST(raw[k] + stbi__paeth(cur[k- output_bytes],0,0)); break;
+      |                                                                                                                 ^~~~~
+stb_image.h: In function ‘stbi__tga_get_comp’:
+stb_image.h:4973:18: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 4973 |       case 16: if(is_grey) return STBI_grey_alpha;
+      |                  ^
+stb_image.h:4975:7: note: here
+ 4975 |       case 15: if(is_rgb16) *is_rgb16 = 1;
+      |       ^~~~
+In file included from encoder.c:60:
+rgblookup.gperf: In function ‘gperf_case_strcmp’:
+rgblookup.gperf:44:1: warning: old-style function definition [-Wold-style-definition]
+   44 | lavender blush, 0xff, 0xf0, 0xf5
+      | ^~~~~~~~~~~~~~~~~
+rgblookup.gperf: In function ‘hash’:
+rgblookup.gperf:67:1: warning: old-style function definition [-Wold-style-definition]
+   67 | grey, 0xbe, 0xbe, 0xbe
+      | ^~~~
+rgblookup.gperf: In function ‘lookup_rgb’:
+rgblookup.gperf:146:1: warning: old-style function definition [-Wold-style-definition]
+  146 | greenyellow, 0xad, 0xff, 0x2f
+      | ^~~~~~~~~~
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+    import sys, os, py_compile, imp
+ModuleNotFoundError: No module named 'imp'
+make[2]: *** [Makefile:358: install-libsixelPYTHON] Error 1
+make[1]: *** [Makefile:454: install-am] Error 2
+make: *** [Makefile:487: install-recursive] Error 1

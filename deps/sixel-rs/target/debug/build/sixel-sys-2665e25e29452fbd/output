@@ -1,0 +1,398 @@
+cargo:rustc-link-lib=dylib=sixel
+cargo:rustc-link-search=native=/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking how to print strings... printf
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking dependency style of gcc... gcc3
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/x86_64-suse-linux/bin/ld
+checking if the linker (/usr/x86_64-suse-linux/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-unknown-linux-gnu file names to x86_64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/x86_64-suse-linux/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... no
+checking if : is a manifest tool... no
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... no
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/x86_64-suse-linux/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for __attribute__((deprecated))... yes
+checking for __attribute__((deprecated))... yes
+configure: pkgconfig directory is ${exec_prefix}/lib/pkgconfig
+configure: bash-completion directory is ${datarootdir}/bash-completion/completions
+configure: zsh-completion directory is ${datarootdir}/zsh/site-functions
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking dependency style of gcc... (cached) gcc3
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking if gcc supports -Wall... yes
+checking if gcc supports -Wextra... yes
+checking if gcc supports -Wpedantic... yes
+checking if gcc supports -Wformat=2... yes
+checking if gcc supports -Wsign-conversion... yes
+checking if gcc supports -Wuninitialized... yes
+checking if gcc supports -Wstrict-overflow... yes
+checking if gcc supports -Wshadow... yes
+checking if gcc supports -Wdouble-promotion... yes
+checking if gcc supports -Wswitch-default... yes
+checking if gcc supports -Bsymbolic... yes
+checking for md5sum... md5sum
+checking for memory.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for stdint.h... (cached) yes
+checking sys/unistd.h usability... yes
+checking sys/unistd.h presence... yes
+checking for sys/unistd.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking for sys/types.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking io.h usability... no
+checking io.h presence... no
+checking for io.h... no
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking time.h usability... yes
+checking time.h presence... yes
+checking for time.h... yes
+checking signal.h usability... yes
+checking signal.h presence... yes
+checking for signal.h... yes
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking sys/signal.h usability... yes
+checking sys/signal.h presence... yes
+checking for sys/signal.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking for memset... yes
+checking for getopt_long... yes
+checking for memcpy... yes
+checking for memmove... yes
+checking for setmode... no
+checking for _setmode... no
+checking for signal... yes
+checking for usleep... yes
+checking for strdup... yes
+checking for strtoul... yes
+checking for calloc... yes
+checking for clock... yes
+checking for clearerr... yes
+checking for stat... yes
+checking for setjmp... yes
+checking for strerror... yes
+checking for isatty... yes
+checking for strncmp... yes
+checking for ldiv... yes
+checking for strtol... yes
+checking for pow... no
+checking whether SIGINT is declared... yes
+checking whether SIGTERM is declared... yes
+checking whether SIGHUP is declared... yes
+checking curl/curl.h usability... no
+checking curl/curl.h presence... no
+checking for curl/curl.h... no
+checking for LIBCURL... no
+configure: libcurl is not available
+configure: libcurl cflags is 
+configure: libcurl libs is 
+checking jpeglib.h usability... yes
+checking jpeglib.h presence... yes
+checking for jpeglib.h... yes
+checking for jpeg_read_header in -ljpeg... yes
+configure: jpeg cflags is -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include
+configure: jpeg libs is -L/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib -ljpeg
+checking png.h usability... yes
+checking png.h presence... yes
+checking for png.h... yes
+checking for png_check_sig in -lpng... yes
+checking whether png_set_gray_1_2_4_to_8 is declared... yes
+checking whether png_set_expand_gray_1_2_4_to_8 is declared... yes
+configure: libpng cflags is -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include
+configure: libpng libs is -L/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib -lpng
+checking for a Python interpreter with version >= 2.3... python3
+checking for python3... /usr/bin/python3
+checking for python3 version... 3.1
+checking for python3 platform... linux
+checking for python3 script directory... ${prefix}/lib/python3.13/site-packages
+checking for python3 extension module directory... ${exec_prefix}/lib64/python3.13/site-packages
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating libsixel.pc
+config.status: creating package.json.in
+config.status: creating include/sixel.h
+config.status: creating src/Makefile
+config.status: creating include/Makefile
+config.status: creating converters/Makefile
+config.status: creating tools/Makefile
+config.status: creating tools/libsixel-config
+config.status: creating python/Makefile
+config.status: creating config.h
+config.status: config.h is unchanged
+config.status: executing depfiles commands
+config.status: executing libtool commands
+
+
+libsixel was configured as follows
+
+       Loader component    : stb_image jpeg png
+       libcurl integration : no
+       pkg-config dir      : ${exec_prefix}/lib/pkgconfig
+       Bash completion dir : ${datarootdir}/bash-completion/completions
+       Zsh completion dir  : ${datarootdir}/zsh/site-functions
+       python bindings     : yes: ${prefix}/lib/python3.13/site-packages
+       gcov integration    : no
+       debugging           : no
+       tests               : no
+
+
+Making install in include
+make[1]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/include'
+make[2]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/include'
+make[2]: Nothing to be done for 'install-exec-am'.
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include'
+ /usr/bin/install -c -m 644 sixel.h '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include'
+make[2]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/include'
+make[1]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/include'
+Making install in src
+make[1]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/src'
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-output.lo -MD -MP -MF .deps/libsixel_la-output.Tpo -c -o libsixel_la-output.lo `test -f 'output.c' || echo './'`output.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-output.lo -MD -MP -MF .deps/libsixel_la-output.Tpo -c output.c  -fPIC -DPIC -o .libs/libsixel_la-output.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-output.lo -MD -MP -MF .deps/libsixel_la-output.Tpo -c output.c -o libsixel_la-output.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-output.Tpo .deps/libsixel_la-output.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-fromsixel.lo -MD -MP -MF .deps/libsixel_la-fromsixel.Tpo -c -o libsixel_la-fromsixel.lo `test -f 'fromsixel.c' || echo './'`fromsixel.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-fromsixel.lo -MD -MP -MF .deps/libsixel_la-fromsixel.Tpo -c fromsixel.c  -fPIC -DPIC -o .libs/libsixel_la-fromsixel.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-fromsixel.lo -MD -MP -MF .deps/libsixel_la-fromsixel.Tpo -c fromsixel.c -o libsixel_la-fromsixel.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-fromsixel.Tpo .deps/libsixel_la-fromsixel.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-tosixel.lo -MD -MP -MF .deps/libsixel_la-tosixel.Tpo -c -o libsixel_la-tosixel.lo `test -f 'tosixel.c' || echo './'`tosixel.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-tosixel.lo -MD -MP -MF .deps/libsixel_la-tosixel.Tpo -c tosixel.c  -fPIC -DPIC -o .libs/libsixel_la-tosixel.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-tosixel.lo -MD -MP -MF .deps/libsixel_la-tosixel.Tpo -c tosixel.c -o libsixel_la-tosixel.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-tosixel.Tpo .deps/libsixel_la-tosixel.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-quant.lo -MD -MP -MF .deps/libsixel_la-quant.Tpo -c -o libsixel_la-quant.lo `test -f 'quant.c' || echo './'`quant.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-quant.lo -MD -MP -MF .deps/libsixel_la-quant.Tpo -c quant.c  -fPIC -DPIC -o .libs/libsixel_la-quant.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-quant.lo -MD -MP -MF .deps/libsixel_la-quant.Tpo -c quant.c -o libsixel_la-quant.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-quant.Tpo .deps/libsixel_la-quant.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-dither.lo -MD -MP -MF .deps/libsixel_la-dither.Tpo -c -o libsixel_la-dither.lo `test -f 'dither.c' || echo './'`dither.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-dither.lo -MD -MP -MF .deps/libsixel_la-dither.Tpo -c dither.c  -fPIC -DPIC -o .libs/libsixel_la-dither.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-dither.lo -MD -MP -MF .deps/libsixel_la-dither.Tpo -c dither.c -o libsixel_la-dither.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-dither.Tpo .deps/libsixel_la-dither.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-frame.lo -MD -MP -MF .deps/libsixel_la-frame.Tpo -c -o libsixel_la-frame.lo `test -f 'frame.c' || echo './'`frame.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-frame.lo -MD -MP -MF .deps/libsixel_la-frame.Tpo -c frame.c  -fPIC -DPIC -o .libs/libsixel_la-frame.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-frame.lo -MD -MP -MF .deps/libsixel_la-frame.Tpo -c frame.c -o libsixel_la-frame.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-frame.Tpo .deps/libsixel_la-frame.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-pixelformat.lo -MD -MP -MF .deps/libsixel_la-pixelformat.Tpo -c -o libsixel_la-pixelformat.lo `test -f 'pixelformat.c' || echo './'`pixelformat.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-pixelformat.lo -MD -MP -MF .deps/libsixel_la-pixelformat.Tpo -c pixelformat.c  -fPIC -DPIC -o .libs/libsixel_la-pixelformat.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-pixelformat.lo -MD -MP -MF .deps/libsixel_la-pixelformat.Tpo -c pixelformat.c -o libsixel_la-pixelformat.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-pixelformat.Tpo .deps/libsixel_la-pixelformat.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-scale.lo -MD -MP -MF .deps/libsixel_la-scale.Tpo -c -o libsixel_la-scale.lo `test -f 'scale.c' || echo './'`scale.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-scale.lo -MD -MP -MF .deps/libsixel_la-scale.Tpo -c scale.c  -fPIC -DPIC -o .libs/libsixel_la-scale.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-scale.lo -MD -MP -MF .deps/libsixel_la-scale.Tpo -c scale.c -o libsixel_la-scale.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-scale.Tpo .deps/libsixel_la-scale.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-chunk.lo -MD -MP -MF .deps/libsixel_la-chunk.Tpo -c -o libsixel_la-chunk.lo `test -f 'chunk.c' || echo './'`chunk.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-chunk.lo -MD -MP -MF .deps/libsixel_la-chunk.Tpo -c chunk.c  -fPIC -DPIC -o .libs/libsixel_la-chunk.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-chunk.lo -MD -MP -MF .deps/libsixel_la-chunk.Tpo -c chunk.c -o libsixel_la-chunk.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-chunk.Tpo .deps/libsixel_la-chunk.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-loader.lo -MD -MP -MF .deps/libsixel_la-loader.Tpo -c -o libsixel_la-loader.lo `test -f 'loader.c' || echo './'`loader.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-loader.lo -MD -MP -MF .deps/libsixel_la-loader.Tpo -c loader.c  -fPIC -DPIC -o .libs/libsixel_la-loader.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-loader.lo -MD -MP -MF .deps/libsixel_la-loader.Tpo -c loader.c -o libsixel_la-loader.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-loader.Tpo .deps/libsixel_la-loader.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-frompnm.lo -MD -MP -MF .deps/libsixel_la-frompnm.Tpo -c -o libsixel_la-frompnm.lo `test -f 'frompnm.c' || echo './'`frompnm.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-frompnm.lo -MD -MP -MF .deps/libsixel_la-frompnm.Tpo -c frompnm.c  -fPIC -DPIC -o .libs/libsixel_la-frompnm.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-frompnm.lo -MD -MP -MF .deps/libsixel_la-frompnm.Tpo -c frompnm.c -o libsixel_la-frompnm.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-frompnm.Tpo .deps/libsixel_la-frompnm.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-fromgif.lo -MD -MP -MF .deps/libsixel_la-fromgif.Tpo -c -o libsixel_la-fromgif.lo `test -f 'fromgif.c' || echo './'`fromgif.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-fromgif.lo -MD -MP -MF .deps/libsixel_la-fromgif.Tpo -c fromgif.c  -fPIC -DPIC -o .libs/libsixel_la-fromgif.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-fromgif.lo -MD -MP -MF .deps/libsixel_la-fromgif.Tpo -c fromgif.c -o libsixel_la-fromgif.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-fromgif.Tpo .deps/libsixel_la-fromgif.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-encoder.lo -MD -MP -MF .deps/libsixel_la-encoder.Tpo -c -o libsixel_la-encoder.lo `test -f 'encoder.c' || echo './'`encoder.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-encoder.lo -MD -MP -MF .deps/libsixel_la-encoder.Tpo -c encoder.c  -fPIC -DPIC -o .libs/libsixel_la-encoder.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-encoder.lo -MD -MP -MF .deps/libsixel_la-encoder.Tpo -c encoder.c -o libsixel_la-encoder.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-encoder.Tpo .deps/libsixel_la-encoder.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-decoder.lo -MD -MP -MF .deps/libsixel_la-decoder.Tpo -c -o libsixel_la-decoder.lo `test -f 'decoder.c' || echo './'`decoder.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-decoder.lo -MD -MP -MF .deps/libsixel_la-decoder.Tpo -c decoder.c  -fPIC -DPIC -o .libs/libsixel_la-decoder.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-decoder.lo -MD -MP -MF .deps/libsixel_la-decoder.Tpo -c decoder.c -o libsixel_la-decoder.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-decoder.Tpo .deps/libsixel_la-decoder.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-writer.lo -MD -MP -MF .deps/libsixel_la-writer.Tpo -c -o libsixel_la-writer.lo `test -f 'writer.c' || echo './'`writer.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-writer.lo -MD -MP -MF .deps/libsixel_la-writer.Tpo -c writer.c  -fPIC -DPIC -o .libs/libsixel_la-writer.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-writer.lo -MD -MP -MF .deps/libsixel_la-writer.Tpo -c writer.c -o libsixel_la-writer.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-writer.Tpo .deps/libsixel_la-writer.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-status.lo -MD -MP -MF .deps/libsixel_la-status.Tpo -c -o libsixel_la-status.lo `test -f 'status.c' || echo './'`status.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-status.lo -MD -MP -MF .deps/libsixel_la-status.Tpo -c status.c  -fPIC -DPIC -o .libs/libsixel_la-status.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-status.lo -MD -MP -MF .deps/libsixel_la-status.Tpo -c status.c -o libsixel_la-status.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-status.Tpo .deps/libsixel_la-status.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-allocator.lo -MD -MP -MF .deps/libsixel_la-allocator.Tpo -c -o libsixel_la-allocator.lo `test -f 'allocator.c' || echo './'`allocator.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-allocator.lo -MD -MP -MF .deps/libsixel_la-allocator.Tpo -c allocator.c  -fPIC -DPIC -o .libs/libsixel_la-allocator.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-allocator.lo -MD -MP -MF .deps/libsixel_la-allocator.Tpo -c allocator.c -o libsixel_la-allocator.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-allocator.Tpo .deps/libsixel_la-allocator.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -I../include/  -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -MT libsixel_la-tty.lo -MD -MP -MF .deps/libsixel_la-tty.Tpo -c -o libsixel_la-tty.lo `test -f 'tty.c' || echo './'`tty.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-tty.lo -MD -MP -MF .deps/libsixel_la-tty.Tpo -c tty.c  -fPIC -DPIC -o .libs/libsixel_la-tty.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../include/ -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -g -O2 -MT libsixel_la-tty.lo -MD -MP -MF .deps/libsixel_la-tty.Tpo -c tty.c -o libsixel_la-tty.o >/dev/null 2>&1
+mv -f .deps/libsixel_la-tty.Tpo .deps/libsixel_la-tty.Plo
+/bin/sh ../libtool  --tag=CC   --mode=link gcc -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic   -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include -I/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/include   -g -O2 -no-undefined -version-info 1:6:0  -o libsixel.la -rpath /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib libsixel_la-output.lo libsixel_la-fromsixel.lo libsixel_la-tosixel.lo libsixel_la-quant.lo libsixel_la-dither.lo libsixel_la-frame.lo libsixel_la-pixelformat.lo libsixel_la-scale.lo libsixel_la-chunk.lo libsixel_la-loader.lo libsixel_la-frompnm.lo libsixel_la-fromgif.lo libsixel_la-encoder.lo libsixel_la-decoder.lo libsixel_la-writer.lo libsixel_la-stb_image_write.lo libsixel_la-status.lo libsixel_la-malloc_stub.lo libsixel_la-allocator.lo libsixel_la-tty.lo -lm  -L/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib -lpng -L/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib -ljpeg   
+libtool: link: rm -fr  .libs/libsixel.a .libs/libsixel.la .libs/libsixel.lai .libs/libsixel.so .libs/libsixel.so.1 .libs/libsixel.so.1.0.6
+libtool: link: gcc -shared  -fPIC -DPIC  .libs/libsixel_la-output.o .libs/libsixel_la-fromsixel.o .libs/libsixel_la-tosixel.o .libs/libsixel_la-quant.o .libs/libsixel_la-dither.o .libs/libsixel_la-frame.o .libs/libsixel_la-pixelformat.o .libs/libsixel_la-scale.o .libs/libsixel_la-chunk.o .libs/libsixel_la-loader.o .libs/libsixel_la-frompnm.o .libs/libsixel_la-fromgif.o .libs/libsixel_la-encoder.o .libs/libsixel_la-decoder.o .libs/libsixel_la-writer.o .libs/libsixel_la-stb_image_write.o .libs/libsixel_la-status.o .libs/libsixel_la-malloc_stub.o .libs/libsixel_la-allocator.o .libs/libsixel_la-tty.o   -lm -L/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib -lpng -ljpeg  -g -O2 -g -O2   -Wl,-soname -Wl,libsixel.so.1 -o .libs/libsixel.so.1.0.6
+libtool: link: (cd ".libs" && rm -f "libsixel.so.1" && ln -s "libsixel.so.1.0.6" "libsixel.so.1")
+libtool: link: (cd ".libs" && rm -f "libsixel.so" && ln -s "libsixel.so.1.0.6" "libsixel.so")
+libtool: link: ar cru .libs/libsixel.a  libsixel_la-output.o libsixel_la-fromsixel.o libsixel_la-tosixel.o libsixel_la-quant.o libsixel_la-dither.o libsixel_la-frame.o libsixel_la-pixelformat.o libsixel_la-scale.o libsixel_la-chunk.o libsixel_la-loader.o libsixel_la-frompnm.o libsixel_la-fromgif.o libsixel_la-encoder.o libsixel_la-decoder.o libsixel_la-writer.o libsixel_la-stb_image_write.o libsixel_la-status.o libsixel_la-malloc_stub.o libsixel_la-allocator.o libsixel_la-tty.o
+libtool: link: ranlib .libs/libsixel.a
+libtool: link: ( cd ".libs" && rm -f "libsixel.la" && ln -s "../libsixel.la" "libsixel.la" )
+make[2]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/src'
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib'
+ /bin/sh ../libtool   --mode=install /usr/bin/install -c   libsixel.la '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib'
+libtool: install: /usr/bin/install -c .libs/libsixel.so.1.0.6 /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib/libsixel.so.1.0.6
+libtool: install: (cd /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib && { ln -s -f libsixel.so.1.0.6 libsixel.so.1 || { rm -f libsixel.so.1 && ln -s libsixel.so.1.0.6 libsixel.so.1; }; })
+libtool: install: (cd /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib && { ln -s -f libsixel.so.1.0.6 libsixel.so || { rm -f libsixel.so && ln -s libsixel.so.1.0.6 libsixel.so; }; })
+libtool: install: /usr/bin/install -c .libs/libsixel.lai /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib/libsixel.la
+libtool: install: /usr/bin/install -c .libs/libsixel.a /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib/libsixel.a
+libtool: install: chmod 644 /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib/libsixel.a
+libtool: install: ranlib /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib/libsixel.a
+libtool: finish: PATH="/home/rodoc/.cargo/bin:/home/rodoc/.local/share/nvim/mason/bin:/home/rodoc/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Users/rodoc/HOME/sbcl/:/mnt/c/Program Files/PowerShell/7/:/mnt/c/Users/rodoc/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/rodoc/AppData/Local/Programs/Python/Python314:/mnt/c/Users/rodoc/AppData/Local/Programs/Python/Python314/Scripts:/mnt/c/Program Files/PowerShell/7:/mnt/c/Users/rodoc/scoop/shims:/mnt/c/Users/rodoc/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/rodoc/HOME/develop/vcpkg:/mnt/c/Users/rodoc/HOME/bin/scripts:/mnt/c/Users/rodoc/HOME/bin/ffmpeg/bin:/mnt/c/Users/rodoc/HOME/bin/apache-maven-3.9.9/bin:/mnt/c/Users/rodoc/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0/LocalCache/local-packages/Python313/Scripts:/mnt/c/Program Files/Notepad++:/mnt/c/Users/rodoc/HOME/bin/grafx2/bin:/mnt/c/Users/rodoc/HOME/bin/dcmoto:/mnt/c/Users/rodoc/HOME/vscode:/mnt/c/Users/rodoc/HOME/bin/hatari:/sbin" ldconfig -n /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/man/man5'
+ /usr/bin/install -c -m 644 sixel.5 '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/man/man5'
+make[2]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/src'
+make[1]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/src'
+Making install in converters
+make[1]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/converters'
+make[2]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/converters'
+gcc -DHAVE_CONFIG_H -I. -I..  -I../include/   -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic  -g -O2 -MT img2sixel-img2sixel.o -MD -MP -MF .deps/img2sixel-img2sixel.Tpo -c -o img2sixel-img2sixel.o `test -f 'img2sixel.c' || echo './'`img2sixel.c
+mv -f .deps/img2sixel-img2sixel.Tpo .deps/img2sixel-img2sixel.Po
+/bin/sh ../libtool  --tag=CC   --mode=link gcc -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic  -g -O2   -o img2sixel img2sixel-img2sixel.o img2sixel-malloc_stub.o ../src/libsixel.la 
+libtool: link: gcc -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -g -O2 -o .libs/img2sixel img2sixel-img2sixel.o img2sixel-malloc_stub.o  ../src/.libs/libsixel.so -L/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib -lm -lpng -ljpeg -Wl,-rpath -Wl,/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib
+gcc -DHAVE_CONFIG_H -I. -I..  -I../include/   -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic  -g -O2 -MT sixel2png-sixel2png.o -MD -MP -MF .deps/sixel2png-sixel2png.Tpo -c -o sixel2png-sixel2png.o `test -f 'sixel2png.c' || echo './'`sixel2png.c
+mv -f .deps/sixel2png-sixel2png.Tpo .deps/sixel2png-sixel2png.Po
+/bin/sh ../libtool  --tag=CC   --mode=link gcc -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic  -g -O2   -o sixel2png sixel2png-sixel2png.o sixel2png-malloc_stub.o ../src/libsixel.la 
+libtool: link: gcc -g -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wsign-conversion -Wuninitialized -Wstrict-overflow -Wshadow -Wdouble-promotion -Wswitch-default -Bsymbolic -g -O2 -o .libs/sixel2png sixel2png-sixel2png.o sixel2png-malloc_stub.o  ../src/.libs/libsixel.so -L/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib -lm -lpng -ljpeg -Wl,-rpath -Wl,/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib
+make[3]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/converters'
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/bin'
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c img2sixel sixel2png '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/bin'
+libtool: install: /usr/bin/install -c .libs/img2sixel /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/bin/img2sixel
+libtool: install: /usr/bin/install -c .libs/sixel2png /home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/bin/sixel2png
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/bash-completion/completions'
+ /usr/bin/install -c -m 644 shell-completion/bash/img2sixel '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/bash-completion/completions'
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/zsh/site-functions'
+ /usr/bin/install -c -m 644 shell-completion/zsh/_img2sixel '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/zsh/site-functions'
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/man/man1'
+ /usr/bin/install -c -m 644 img2sixel.1 sixel2png.1 '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/share/man/man1'
+make[3]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/converters'
+make[2]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/converters'
+make[1]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/converters'
+Making install in tools
+make[1]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/tools'
+make[2]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/tools'
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/bin'
+ /usr/bin/install -c libsixel-config '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/bin'
+make[2]: Nothing to be done for 'install-data-am'.
+make[2]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/tools'
+make[1]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/tools'
+Making install in python
+make[1]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/python'
+make[2]: Entering directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/python'
+make[2]: Nothing to be done for 'install-exec-am'.
+ /usr/bin/mkdir -p '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib/python3.13/site-packages/libsixel'
+ /usr/bin/install -c -m 644 libsixel/__init__.py libsixel/encoder.py libsixel/decoder.py '/home/rodoc/develop/rs-sixel/deps/sixel-rs/target/debug/build/sixel-sys-2665e25e29452fbd/out/lib/python3.13/site-packages/libsixel'
+make[2]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/python'
+make[1]: Leaving directory '/home/rodoc/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sixel-sys-0.3.1/libsixel/python'
