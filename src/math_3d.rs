@@ -122,6 +122,14 @@ impl Vec3 {
             Vec3::new(0.0, 0.0, 0.0)
         }
     }
+
+    pub fn reflect(&self, normal: Vec3) -> Vec3 {
+        // Formule : R = I - 2 * (I . N) * N
+        // On suppose que 'self' (l'incident) et 'normal' sont normalisés.
+        let dot = self.dot(normal);
+        let factor = 2.0 * dot;
+        self.sub(normal.mul(factor))
+    }
 }
 
 
@@ -1263,7 +1271,61 @@ pub mod raytrace {
     }
 
     // --- RENDERER ---
+    fn trace_scene(
+        origin: Vec3,
+        direction: Vec3,
+        bvh_nodes: &[BVHNode],
+        triangles: &[TriData],
+        light_dir: Vec3,
+        material: &MaterialRaytrace,
+        depth: u32,
+    ) -> (f32, f32, f32) {
+        // Limite de récursion (pour éviter les boucles infinies entre miroirs)
+        if depth > 4 {
+            return (0.1, 0.1, 0.1); // Couleur ambiante de fond
+        }
 
+        let mut t_max = f32::MAX;
+        if let Some(hit) = trace_bvh(bvh_nodes, triangles, 0, origin, direction, 0.001, &mut t_max) {
+            let v = origin.sub(hit.hit_p).normalize();
+            let l = light_dir.normalize();
+            
+            // 1. Calcul de la lumière locale (Phong)
+            let local_intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
+
+            let mut final_color = local_intensity;
+
+            // 2. Gestion de la Réflexion (Miroir)
+            if material.reflectivity > 0.0 {
+                let reflect_dir = direction.reflect(hit.normal).normalize();
+                // On décale le point d'origine (epsilon) pour éviter l'auto-intersection
+                let reflect_origin = hit.hit_p.add(hit.normal.mul(0.001));
+                
+                let reflected_color = trace_scene(reflect_origin, reflect_dir, bvh_nodes, triangles, light_dir, material, depth + 1);
+                
+                final_color.0 = final_color.0 * (1.0 - material.reflectivity) + reflected_color.0 * material.reflectivity;
+                final_color.1 = final_color.1 * (1.0 - material.reflectivity) + reflected_color.1 * material.reflectivity;
+                final_color.2 = final_color.2 * (1.0 - material.reflectivity) + reflected_color.2 * material.reflectivity;
+            }
+
+            // 3. Gestion de la Transparence (Réfraction simple)
+            if material.transparency > 0.0 {
+                // Pour simplifier, on tire un rayon tout droit (ou utilise refract() si tu l'as implémenté)
+                let refract_origin = hit.hit_p.sub(hit.normal.mul(0.001));
+                let refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
+
+                final_color.0 = final_color.0 * (1.0 - material.transparency) + refracted_color.0 * material.transparency;
+                final_color.1 = final_color.1 * (1.0 - material.transparency) + refracted_color.1 * material.transparency;
+                final_color.2 = final_color.2 * (1.0 - material.transparency) + refracted_color.2 * material.transparency;
+            }
+
+            return final_color;
+        }
+
+        (0.06, 0.06, 0.06) // Couleur du "vide" (noir grisâtre)
+    }
+
+    
     pub fn render_raytrace(
         triangles: &[(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)], 
         eye: (f32, f32, f32), target: Point3d,
@@ -1303,13 +1365,25 @@ pub mod raytrace {
                 let zoom = 3.5;
                 let ray_dir = forward.add(right.mul(px / zoom)).add(up.mul(py / zoom)).normalize();
 
-                let mut t_max = f32::MAX;
-                if let Some(hit) = trace_bvh(&bvh_nodes, &triangles_data, 0, eye_vec, ray_dir, 0.001, &mut t_max) {
-                    let v = eye_vec.sub(hit.hit_p).normalize();
-                    let l = light_dir.normalize();
-                    let intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
-                    row[x as usize] = math_3d::utils::intensity_to_color(intensity);
-                }
+                // Appel de la fonction récursive au lieu du simple trace_bvh
+                let color = trace_scene(
+                    eye_vec, 
+                    ray_dir, 
+                    &bvh_nodes, 
+                    &triangles_data, 
+                    light_dir, 
+                    material, 
+                    0
+                );
+                row[x as usize] = math_3d::utils::intensity_to_color(color);
+                
+                // let mut t_max = f32::MAX;
+                // if let Some(hit) = trace_bvh(&bvh_nodes, &triangles_data, 0, eye_vec, ray_dir, 0.001, &mut t_max) {
+                //     let v = eye_vec.sub(hit.hit_p).normalize();
+                //     let l = light_dir.normalize();
+                //     let intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
+                //     row[x as usize] = math_3d::utils::intensity_to_color(intensity);
+                // }
             }
         });
 

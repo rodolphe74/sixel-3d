@@ -95,7 +95,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let all_transformed_triangles: Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)> = raytrace::do_transforms(all_triangles, &transforms);
 
     // Render
-    let material_raytrace: MaterialRaytrace = MaterialRaytrace { material: Material::black_plastic(), reflectivity: 0.8, transparency: 0.5, refractive_index: 1.0 };
+    let material_raytrace: MaterialRaytrace = MaterialRaytrace { material: Material::gold(), reflectivity: 0.0, transparency: 0.95, refractive_index: 1.0 };
     raytrace::render_raytrace(&all_transformed_triangles, eye, target, light_dir, &material_raytrace, WIDTH as u32, HEIGHT as u32, &mut fb);
 
     
