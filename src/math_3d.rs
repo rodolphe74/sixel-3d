@@ -156,6 +156,16 @@ pub struct Material {
     pub ns: f32,             // Shininess
 }
 
+
+#[allow(dead_code)]
+#[derive(Clone, Copy)]
+pub struct MaterialRaytrace {
+    pub material: Material,
+    pub reflectivity: f32,    // 0.0 (mat) à 1.0 (miroir parfait)
+    pub transparency: f32,    // 0.0 (opaque) à 1.0 (verre)
+    pub refractive_index: f32, // ex: 1.0 pour air, 1.5 pour verre    
+}
+
 #[allow(dead_code)]
 impl Material {
     // --- PIERRES PRÉCIEUSES ---
@@ -977,9 +987,11 @@ pub mod utils {
 
 
 pub mod raytrace {
-    use crate::{frame_buffer::FrameBuffer, math_3d::{self, Material, Point3d, Vec3, Transform}};
+    use crate::{frame_buffer::FrameBuffer, math_3d::{self, Point3d, Vec3, Transform}};
     use rayon::prelude::*;
     use wavefront::Vertex;
+
+    use super::MaterialRaytrace;
 
     // Structure pour stocker les données de triangles optimisées
     struct TriData {
@@ -1256,6 +1268,7 @@ pub mod raytrace {
         triangles: &[(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)], 
         eye: (f32, f32, f32), target: Point3d,
         light_dir: Vec3,
+        material: &MaterialRaytrace,
         width: u32, height: u32,
         fb: &mut FrameBuffer
     ) {
@@ -1294,7 +1307,7 @@ pub mod raytrace {
                 if let Some(hit) = trace_bvh(&bvh_nodes, &triangles_data, 0, eye_vec, ray_dir, 0.001, &mut t_max) {
                     let v = eye_vec.sub(hit.hit_p).normalize();
                     let l = light_dir.normalize();
-                    let intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &Material::green_plastic());
+                    let intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
                     row[x as usize] = math_3d::utils::intensity_to_color(intensity);
                 }
             }

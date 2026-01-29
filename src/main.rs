@@ -1,6 +1,6 @@
 pub(crate) use core::f32;
 use math_3d::raytrace::{self, get_triangles};
-use math_3d::{Material, Transform};
+use math_3d::{Material, MaterialRaytrace, Transform};
 use sixel_rs::encoder::Encoder;
 use sixel_sys::PixelFormat;
 use std::io::{Write};
@@ -16,9 +16,8 @@ mod frame_buffer;
 mod math_3d;
 mod penger;
 
-const WIDTH: usize = 640;
-const HEIGHT: usize = 640;
-
+const WIDTH: usize = 1280;
+const HEIGHT: usize = 1280;
 
 
 fn clear_stdout() -> Result<(), Box<dyn std::error::Error>> {
@@ -35,7 +34,7 @@ fn flush_stdout() -> Result<(), Box<dyn std::error::Error>> {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Lecture d'un modele wavefront
-    let model = wavefront::Obj::from_file("sphere4.obj")?;
+    let model = wavefront::Obj::from_file("torso_slayer.obj")?;
     dbg!(&model.triangles().count());
 
     #[allow(unreachable_code)]    
@@ -57,7 +56,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let target: Point3d = (0.0, 0.0, -0.0);
     let focal: f32 = WIDTH as f32 * 2.0;
-    let eye: Point3d = (0.0, 0.0, 6.0);
+    let eye: Point3d = (0.0, 0.0, 210.0);
     let light_dir: Vec3 = Vec3 {
         x: -0.5,
         y: 1.0,
@@ -83,8 +82,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     z_buffer.fill(f32::NEG_INFINITY);
 
 
-    // let transforms: Vec<&Transform> = vec![&t1, &t2];
-    let transforms: Vec<&Transform> = vec![];
+    let transforms: Vec<&Transform> = vec![&t1, &t2];
+    // let transforms: Vec<&Transform> = vec![];
 
     math_3d::utils::draw_obj_model_gouraud(&model, &transforms, &Material::white_plastic(), eye, target, light_dir, focal, WIDTH as u32, HEIGHT as u32, &mut fb, &mut z_buffer);
 
@@ -96,7 +95,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let all_transformed_triangles: Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)> = raytrace::do_transforms(all_triangles, &transforms);
 
     // Render
-    raytrace::render_raytrace(&all_transformed_triangles, eye, target, light_dir, WIDTH as u32, HEIGHT as u32, &mut fb);
+    let material_raytrace: MaterialRaytrace = MaterialRaytrace { material: Material::black_plastic(), reflectivity: 0.8, transparency: 0.5, refractive_index: 1.0 };
+    raytrace::render_raytrace(&all_transformed_triangles, eye, target, light_dir, &material_raytrace, WIDTH as u32, HEIGHT as u32, &mut fb);
 
     
     encoder
