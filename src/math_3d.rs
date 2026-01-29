@@ -123,12 +123,14 @@ impl Vec3 {
         }
     }
 
+
     pub fn reflect(&self, normal: Vec3) -> Vec3 {
-        // Formule : R = I - 2 * (I . N) * N
-        // On suppose que 'self' (l'incident) et 'normal' sont normalisés.
+        // Formule : R = I - 2 * (I · N) * N
+        // 'self' est le rayon incident (I)
         let dot = self.dot(normal);
-        let factor = 2.0 * dot;
-        self.sub(normal.mul(factor))
+        normal.mul(2.0 * dot).sub(*self).mul(-1.0) 
+        // Ou plus simplement si tu as sub(self, other):
+        // self.sub(normal.mul(2.0 * self.dot(normal)))
     }
 }
 
@@ -692,9 +694,9 @@ pub mod utils {
 
     pub fn intensity_to_color(intensity: (f32, f32, f32)) -> (u8, u8, u8) {
         (
-            (255.0 * intensity.0).min(255.0) as u8,
-            (255.0 * intensity.1).min(255.0) as u8,
-            (255.0 * intensity.2).min(255.0) as u8,
+            (intensity.0.min(1.0) * 255.0) as u8,
+            (intensity.1.min(1.0) * 255.0) as u8,
+            (intensity.2.min(1.0) * 255.0) as u8,
         )
     }
 
