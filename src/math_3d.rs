@@ -259,6 +259,47 @@ impl Material {
     }
 }
 
+#[allow(dead_code)]
+impl MaterialRaytrace {
+    // --- RAYTRACE ---
+    pub fn epic_slayer() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.1, 0.1, 0.1), // Un peu plus d'ambiant pour déboucher les ombres
+                kd: (0.4, 0.3, 0.1), 
+                ks: (1.0, 1.0, 1.0), // Spéculaire blanc pur
+                ns: 100.0,           // Très poli
+            },
+            reflectivity: 0.6,       // 60% de miroir
+            transparency: 0.0,
+            refractive_index: 1.0,
+        }
+    }
+
+    pub fn chrome_raytrace() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material::chrome(), // Utilise ton Material::chrome() existant
+            reflectivity: 0.9,            // 90% de réflexion (très brillant)
+            transparency: 0.0,            // Opaque
+            refractive_index: 1.0,        // Pas de réfraction
+        }
+    }
+
+    pub fn ice_crystal() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.05, 0.05, 0.05), // Ambiant très faible
+                kd: (0.1, 0.2, 0.3),    // Diffus sombre (ne doit pas polluer la transparence)
+                ks: (1.0, 1.0, 1.0),    // Spéculaire blanc pur (reflets de surface brillants)
+                ns: 150.0,              // Très poli
+            },
+            reflectivity: 0.2,          // 20% de reflet miroir (important pour la brillance)
+            transparency: 0.8,          // 80% de transparence
+            refractive_index: 1.33,     // Indice de l'eau/glace
+        }
+    }
+}
+
 
 pub struct Transform {
     pub scale: f32,
@@ -1272,7 +1313,97 @@ pub mod raytrace {
         if t > 0.000001 { Some((t, u, v)) } else { None }
     }
 
+    pub fn calculate_sky_color(direction: Vec3) -> (f32, f32, f32) {
+        // Normalisation de direction.y entre 0.0 et 1.0
+        let t = 0.5 * (direction.y + 1.0);
+
+        // Couleur A (Bas / Horizon) : Rouge
+        // RGB: (1.0, 0.05, 0.05)
+        let color_a = (1.0, 0.05, 0.05);
+
+        // Couleur B (Haut / Zénith) : Turquoise
+        // RGB: (0.0, 0.8, 0.8)
+        let color_b = (0.0, 0.8, 0.8);
+
+        // Interpolation linéaire (Lerp)
+        let r = (1.0 - t) * color_a.0 + t * color_b.0;
+        let g = (1.0 - t) * color_a.1 + t * color_b.1;
+        let b = (1.0 - t) * color_a.2 + t * color_b.2;
+
+        (r, g, b)
+    }
+
+    
     // --- RENDERER ---
+    // fn trace_scene(
+    //     origin: Vec3,
+    //     direction: Vec3,
+    //     bvh_nodes: &[BVHNode],
+    //     triangles: &[TriData],
+    //     light_dir: Vec3,
+    //     material: &MaterialRaytrace,
+    //     depth: u32,
+    // ) -> (f32, f32, f32) {
+    //     // Limite de récursion (pour éviter les boucles infinies entre miroirs)
+    //     if depth > 4 {
+    //         return (0.1, 0.1, 0.1); // Couleur ambiante de fond
+    //     }
+
+    //     let mut t_max = f32::MAX;
+    //     if let Some(hit) = trace_bvh(bvh_nodes, triangles, 0, origin, direction, 0.001, &mut t_max) {
+    //         let v = origin.sub(hit.hit_p).normalize();
+    //         let l = light_dir.normalize();
+            
+    //         // 1. Calcul de la lumière locale (Phong)
+    //         let local_intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
+
+    //         let mut final_color = local_intensity;
+
+    //         // 2. Gestion de la Réflexion (Miroir)
+    //         if material.reflectivity > 0.0 {
+    //             let reflect_dir = direction.reflect(hit.normal).normalize();
+    //             // On décale le point d'origine (epsilon) pour éviter l'auto-intersection
+    //             let reflect_origin = hit.hit_p.add(hit.normal.mul(0.001));
+                
+    //             let reflected_color = trace_scene(reflect_origin, reflect_dir, bvh_nodes, triangles, light_dir, material, depth + 1);
+                
+    //             final_color.0 = final_color.0 * (1.0 - material.reflectivity) + reflected_color.0 * material.reflectivity;
+    //             final_color.1 = final_color.1 * (1.0 - material.reflectivity) + reflected_color.1 * material.reflectivity;
+    //             final_color.2 = final_color.2 * (1.0 - material.reflectivity) + reflected_color.2 * material.reflectivity;
+    //         }
+
+    //         // 3. Gestion de la Transparence (Réfraction simple)
+    //         // if material.transparency > 0.0 {
+    //         //     // Pour simplifier, on tire un rayon tout droit (ou utilise refract() si tu l'as implémenté)
+    //         //     let refract_origin = hit.hit_p.sub(hit.normal.mul(0.001));
+    //         //     let refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
+
+    //         //     final_color.0 = final_color.0 * (1.0 - material.transparency) + refracted_color.0 * material.transparency;
+    //         //     final_color.1 = final_color.1 * (1.0 - material.transparency) + refracted_color.1 * material.transparency;
+    //         //     final_color.2 = final_color.2 * (1.0 - material.transparency) + refracted_color.2 * material.transparency;
+    //         // }
+
+    //         if material.transparency > 0.0 {
+    //             let refract_origin = hit.hit_p.sub(hit.normal.mul(0.001));
+    //             let refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
+
+    //             // 1. On garde le spéculaire (le petit reflet blanc brillant en surface)
+    //             // 2. On remplace le diffus par la couleur réfractée
+    //             final_color.0 = (final_color.0 * material.reflectivity) + (refracted_color.0 * material.transparency);
+    //             final_color.1 = (final_color.1 * material.reflectivity) + (refracted_color.1 * material.transparency);
+    //             final_color.2 = (final_color.2 * material.reflectivity) + (refracted_color.2 * material.transparency);
+                
+    //             // Si tu veux que l'objet colore la lumière qui le traverse (ex: verre rouge) :
+    //             // final_color.0 = refracted_color.0 * material.kd.0;
+    //         }
+
+    //         return final_color;
+    //     }
+
+    //     //(0.06, 0.06, 0.06) // Couleur du "vide" (noir grisâtre)
+    //     calculate_sky_color(direction)
+    // }
+
     fn trace_scene(
         origin: Vec3,
         direction: Vec3,
@@ -1282,9 +1413,9 @@ pub mod raytrace {
         material: &MaterialRaytrace,
         depth: u32,
     ) -> (f32, f32, f32) {
-        // Limite de récursion (pour éviter les boucles infinies entre miroirs)
+        // 1. Limite de récursion et ciel
         if depth > 4 {
-            return (0.1, 0.1, 0.1); // Couleur ambiante de fond
+            return calculate_sky_color(direction);
         }
 
         let mut t_max = f32::MAX;
@@ -1292,41 +1423,55 @@ pub mod raytrace {
             let v = origin.sub(hit.hit_p).normalize();
             let l = light_dir.normalize();
             
-            // 1. Calcul de la lumière locale (Phong)
-            let local_intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
+            // --- CALCUL DU FRESNEL ---
+            // Détermine si on regarde la face de biais ou de face
+            let view_dot_norm = direction.dot(hit.normal).abs();
+            let fresnel = (1.0 - view_dot_norm).powi(3); // Coefficient de réflexion sur les bords
 
-            let mut final_color = local_intensity;
-
-            // 2. Gestion de la Réflexion (Miroir)
-            if material.reflectivity > 0.0 {
+            // --- GESTION DES REBONDS (REFLEXION) ---
+            let mut reflected_color = (0.0, 0.0, 0.0);
+            // On augmente la réflectivité naturelle par le fresnel
+            let effective_refl = material.reflectivity.max(fresnel * 0.5); 
+            
+            if effective_refl > 0.0 {
                 let reflect_dir = direction.reflect(hit.normal).normalize();
-                // On décale le point d'origine (epsilon) pour éviter l'auto-intersection
                 let reflect_origin = hit.hit_p.add(hit.normal.mul(0.001));
-                
-                let reflected_color = trace_scene(reflect_origin, reflect_dir, bvh_nodes, triangles, light_dir, material, depth + 1);
-                
-                final_color.0 = final_color.0 * (1.0 - material.reflectivity) + reflected_color.0 * material.reflectivity;
-                final_color.1 = final_color.1 * (1.0 - material.reflectivity) + reflected_color.1 * material.reflectivity;
-                final_color.2 = final_color.2 * (1.0 - material.reflectivity) + reflected_color.2 * material.reflectivity;
+                reflected_color = trace_scene(reflect_origin, reflect_dir, bvh_nodes, triangles, light_dir, material, depth + 1);
             }
 
-            // 3. Gestion de la Transparence (Réfraction simple)
-            if material.transparency > 0.0 {
-                // Pour simplifier, on tire un rayon tout droit (ou utilise refract() si tu l'as implémenté)
+            // --- GESTION DE LA TRANSPARENCE (REFRACTION) ---
+            let mut refracted_color = (0.0, 0.0, 0.0);
+            let effective_trans = material.transparency * (1.0 - effective_refl);
+
+            if effective_trans > 0.0 {
                 let refract_origin = hit.hit_p.sub(hit.normal.mul(0.001));
-                let refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
-
-                final_color.0 = final_color.0 * (1.0 - material.transparency) + refracted_color.0 * material.transparency;
-                final_color.1 = final_color.1 * (1.0 - material.transparency) + refracted_color.1 * material.transparency;
-                final_color.2 = final_color.2 * (1.0 - material.transparency) + refracted_color.2 * material.transparency;
+                // On tire tout droit pour l'instant (direction)
+                refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
             }
 
-            return final_color;
+            // --- CALCUL DE L'INTENSITÉ LOCALE (PHONG) ---
+            let (r_local, g_local, b_local) = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
+
+            // --- MÉLANGE FINAL ---
+            // On sépare le spéculaire (éclat lumineux) du reste
+            let mut final_r = (reflected_color.0 * effective_refl) + (refracted_color.0 * effective_trans);
+            let mut final_g = (reflected_color.1 * effective_refl) + (refracted_color.1 * effective_trans);
+            let mut final_b = (reflected_color.2 * effective_refl) + (refracted_color.2 * effective_trans);
+
+            // On ajoute le spéculaire par-dessus pour la brillance (ks)
+            // Et un peu de diffus/ambiant si l'objet n'est pas totalement transparent
+            let opacity = 1.0 - effective_trans;
+            final_r += r_local * opacity;
+            final_g += g_local * opacity;
+            final_b += b_local * opacity;
+
+            return (final_r, final_g, final_b);
         }
 
-        (0.06, 0.06, 0.06) // Couleur du "vide" (noir grisâtre)
+        // Retourne le dégradé turquoise/rouge si rien n'est touché
+        calculate_sky_color(direction)
     }
-
+    
     
     pub fn render_raytrace(
         triangles: &[(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)], 

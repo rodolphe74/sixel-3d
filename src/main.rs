@@ -95,15 +95,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let all_transformed_triangles: Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)> = raytrace::do_transforms(all_triangles, &transforms);
 
     // Render
-    pub fn chrome_raytrace() -> MaterialRaytrace {
-        MaterialRaytrace {
-            material: Material::chrome(), // Utilise ton Material::chrome() existant
-            reflectivity: 0.9,            // 90% de réflexion (très brillant)
-            transparency: 0.0,            // Opaque
-            refractive_index: 1.0,        // Pas de réfraction
-        }
-    }
-    raytrace::render_raytrace(&all_transformed_triangles, eye, target, light_dir, &chrome_raytrace(), WIDTH as u32, HEIGHT as u32, &mut fb);
+    raytrace::render_raytrace(&all_transformed_triangles, eye, target, light_dir, &&MaterialRaytrace::epic_slayer(), WIDTH as u32, HEIGHT as u32, &mut fb);
 
     
     encoder
