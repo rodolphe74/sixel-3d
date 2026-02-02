@@ -789,34 +789,6 @@ pub mod utils {
     }
     
 
-    // pub fn calculate_intensity(
-    //     n: Vec3, 
-    //     l: Vec3, 
-    //     v: Vec3, 
-    //     m: &Material
-    // ) -> (f32, f32, f32) {
-
-    //     // n perpendiculaire à la surface
-    //     // l vecteur du point vers la source de lumière
-    //     // v vecteur du point vers la camera
-        
-    //     // 1. Diffus
-    //     let dot_diffuse = n.dot(l).max(0.0);
-        
-    //     // 2. Spéculaire (Blinn-Phong)
-    //     let h = l.add(v).normalize();
-    //     let dot_spec = n.dot(h).max(0.0);
-    //     let spec_power = dot_spec.powf(m.ns);
-
-    //     // 3. Somme par canal (Ambiant + Diffus + Spéculaire)
-    //     let r = (m.ka.0 * 1.0) + (m.kd.0 * dot_diffuse) + (m.ks.0 * spec_power);
-    //     let g = (m.ka.1 * 1.0) + (m.kd.1 * dot_diffuse) + (m.ks.1 * spec_power);
-    //     let b = (m.ka.2 * 1.0) + (m.kd.2 * dot_diffuse) + (m.ks.2 * spec_power);
-
-    //     (r, g, b)
-    // }
-
-
     pub fn calculate_intensity(n: Vec3, light_dir: Vec3, v: Vec3, m: &Material) -> (f32, f32, f32) {
         // 1. S'assurer que les vecteurs d'entrée sont normalisés
         let n = n.normalize();
@@ -1158,7 +1130,7 @@ pub mod utils {
 
 
 
-
+#[allow(dead_code)]
 pub mod raytrace {
     use crate::{frame_buffer::FrameBuffer, math_3d::{self, Point3d, Vec3, Transform}};
     use rayon::prelude::*;
@@ -1220,14 +1192,12 @@ pub mod raytrace {
 
 
     // Ce que le BVH et le traceur vont utiliser
-    #[allow(dead_code)]
     pub struct Scene {
         pub triangles: Vec<TriData>,
         pub materials: Vec<MaterialRaytrace>, // Un catalogue de matériaux
         pub bvh_nodes: Vec<BVHNode>,
     }
 
-    #[allow(dead_code)]
     impl Scene {
         pub fn build(objets: Vec<Object>) -> Self {
             let mut all_materials = Vec::new();
@@ -1262,7 +1232,6 @@ pub mod raytrace {
     
 
     // Structure retournée lors d'un impact
-    #[allow(unused)]
     pub struct HitInfo {
         pub t: f32,
         pub normal: Vec3,
@@ -1294,7 +1263,6 @@ pub mod raytrace {
     }
 
     // --- FONCTIONS DE CALCUL ---
-
     pub fn get_obj<'a, I>(triangles: I, material: &MaterialRaytrace) -> Object
     where I: Iterator<Item = [Vertex<'a>; 3]> {
         let mut tris: Vec<TriData> = Vec::new();

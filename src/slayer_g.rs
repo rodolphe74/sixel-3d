@@ -1,8 +1,6 @@
 use std::io::{Write, stdout};
 use frame_buffer::FrameBuffer;
-use math_3d::{Point3d, Transform, Vec3};
-use math_3d::raytrace::{self, get_obj};
-use math_3d::MaterialRaytrace;
+use math_3d::{Point3d, Transform, Vec3, Material};
 use sixel_rs::encoder::Encoder;
 use sixel_sys::PixelFormat;
 mod math_3d;
@@ -26,11 +24,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 
     let mut fb: FrameBuffer = FrameBuffer::new(WIDTH, HEIGHT);
-    fb.clean((255, 255, 255));
+    fb.clean((200, 200, 255));
     clear_stdout()?;
 
     let target: Point3d = (0.0, 0.0, -0.0);
     let eye: Point3d = (0.0, 0.0, 210.0);
+    let focal: f32 = WIDTH as f32 * 2.0;
+    
     let light_dir: Vec3 = Vec3 {
         x: -0.5,
         y: 1.0,
@@ -50,12 +50,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
 
     let transforms: Vec<&Transform> = vec![&t1, &t2];
-    let material: MaterialRaytrace = MaterialRaytrace::polished_steel_pov();
-    let mut slayer_obj = get_obj(wavefront::Obj::from_file("torso_slayer.obj")?.triangles(), &material);
-    slayer_obj.do_transforms(&transforms);
+    let model = wavefront::Obj::from_file("torso_slayer.obj")?;
+    let mut z_buffer: Vec<f32> = vec![f32::NEG_INFINITY; WIDTH * HEIGHT];
 
-    let scene = raytrace::Scene::build(vec![slayer_obj]);
-    raytrace::render_scene_raytrace(&scene, eye, target, light_dir, WIDTH as u32, HEIGHT as u32, &mut fb);
+    math_3d::utils::draw_obj_model_gouraud(&model, &transforms, &Material::silver(), eye, target, light_dir, focal, WIDTH as u32, HEIGHT as u32, &mut fb, &mut z_buffer);
 
     let encoder: Encoder = match Encoder::new() {
         Ok(o) => o,

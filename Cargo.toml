@@ -14,3 +14,7 @@ rand = "0.9.2"
 [[bin]]
 name = "slayer_r"
 path = "src/slayer_r.rs"
+
+[[bin]]
+name = "slayer_g"
+path = "src/slayer_g.rs"
