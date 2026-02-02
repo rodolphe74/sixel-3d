@@ -132,6 +132,25 @@ impl Vec3 {
         // Ou plus simplement si tu as sub(self, other):
         // self.sub(normal.mul(2.0 * self.dot(normal)))
     }
+
+    pub fn refract(&self, normal: Vec3, eta: f32) -> Option<Vec3> {
+        let uv = self.normalize();
+        let n = normal;
+        let dt = uv.dot(n);
+        
+        // Formule de Snell-Descartes sous forme vectorielle
+        let discriminant = 1.0 - eta * eta * (1.0 - dt * dt);
+
+        if discriminant > 0.0 {
+            // Le rayon traverse : calcul de la nouvelle direction
+            // Rayon = eta * (I - N * cos_theta) - N * sqrt(discriminant)
+            let refracted = uv.sub(n.mul(dt)).mul(eta).sub(n.mul(discriminant.sqrt()));
+            Some(refracted)
+        } else {
+            // Réflexion totale interne : le rayon ne peut pas sortir/entrer
+            None
+        }
+    }
 }
 
 
@@ -296,6 +315,109 @@ impl MaterialRaytrace {
             reflectivity: 0.2,          // 20% de reflet miroir (important pour la brillance)
             transparency: 0.8,          // 80% de transparence
             refractive_index: 1.33,     // Indice de l'eau/glace
+        }
+    }
+
+    
+    /// BIBLIOTHÈQUE DE MÉTAUX (Inspirée de POV-Ray metals.inc)
+    /// Note : On utilise un 'ka' (ambiant) riche et un 'reflectivity' modéré 
+    /// pour préserver la saturation des couleurs métalliques.
+
+    pub fn gold_pov() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.20, 0.15, 0.05), // Teinte "cuivrée" de base
+                kd: (0.0, 0.0, 0.0),    
+                ks: (1.00, 0.85, 0.45), // L'éclat jaune-or
+                ns: 120.0,
+            },
+            reflectivity: 0.25, 
+            transparency: 0.0,
+            refractive_index: 1.0,
+        }
+    }
+
+    pub fn chrome_pov() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.1, 0.1, 0.1),
+                kd: (0.05, 0.05, 0.05),
+                ks: (0.9, 0.9, 1.0),    // Très neutre, légèrement froid
+                ns: 500.0,              // Très poli
+            },
+            reflectivity: 0.50,         // Le chrome peut être plus généreux
+            transparency: 0.0,
+            refractive_index: 1.0,
+        }
+    }
+
+    pub fn copper_pov() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.18, 0.06, 0.03), 
+                kd: (0.0, 0.0, 0.0),
+                ks: (0.85, 0.50, 0.30), // Rouge-orangé cuivré
+                ns: 100.0,
+            },
+            reflectivity: 0.22,
+            transparency: 0.0,
+            refractive_index: 1.0,
+        }
+    }
+
+    pub fn silver_pov() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.15, 0.15, 0.15),
+                kd: (0.0, 0.0, 0.0),
+                ks: (0.95, 0.95, 0.95), // Blanc pur brillant
+                ns: 250.0,
+            },
+            reflectivity: 0.30,
+            transparency: 0.0,
+            refractive_index: 1.0,
+        }
+    }
+
+    pub fn brass_pov() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.15, 0.12, 0.05),
+                kd: (0.0, 0.0, 0.0),
+                ks: (0.80, 0.70, 0.30), // Jaune moins saturé que l'or
+                ns: 80.0,
+            },
+            reflectivity: 0.20,
+            transparency: 0.0,
+            refractive_index: 1.0,
+        }
+    }
+
+    pub fn bronze_pov() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.10, 0.07, 0.05),
+                kd: (0.1, 0.05, 0.0),
+                ks: (0.60, 0.40, 0.20), // Teinte terreuse profonde
+                ns: 40.0,               // Moins poli, éclat plus large
+            },
+            reflectivity: 0.15,
+            transparency: 0.0,
+            refractive_index: 1.0,
+        }
+    }
+
+    pub fn polished_steel_pov() -> MaterialRaytrace {
+        MaterialRaytrace {
+            material: Material {
+                ka: (0.1, 0.1, 0.1),
+                kd: (0.0, 0.0, 0.0),
+                ks: (0.7, 0.7, 0.75),   // Gris acier
+                ns: 150.0,
+            },
+            reflectivity: 0.35,
+            transparency: 0.0,
+            refractive_index: 1.0,
         }
     }
 }
@@ -1045,11 +1167,99 @@ pub mod raytrace {
     use super::MaterialRaytrace;
 
     // Structure pour stocker les données de triangles optimisées
-    struct TriData {
+    pub struct TriData {
         v0: Vec3, v1: Vec3, v2: Vec3,
         n0: Vec3, n1: Vec3, n2: Vec3,
         center: Vec3,
+        material_id: u32
     }
+
+
+    #[allow(dead_code)]
+    pub struct Object {
+        pub triangles: Vec<TriData>,
+        pub material: MaterialRaytrace,
+    }
+
+    #[allow(dead_code)]
+    impl Object {
+        pub fn do_transforms(&mut self, transforms: &[&Transform]) {
+            // On itère de manière mutable sur chaque triangle
+            for tri in self.triangles.iter_mut() {
+                // On applique chaque transformation successivement au triangle actuel
+                for trans in transforms {
+                    // 1. Transformer les sommets (Points)
+                    let vt0 = Transform::transform_point(tri.v0.to_point3d(), trans);
+                    let vt1 = Transform::transform_point(tri.v1.to_point3d(), trans);
+                    let vt2 = Transform::transform_point(tri.v2.to_point3d(), trans);
+
+                    // 2. Transformer les normales (Vecteurs)
+                    let nt0 = Transform::transform_vec3(tri.n0, trans);
+                    let nt1 = Transform::transform_vec3(tri.n1, trans);
+                    let nt2 = Transform::transform_vec3(tri.n2, trans);
+
+                    // 3. Mettre à jour les données du triangle en place
+                    tri.v0 = Vec3::from(vt0);
+                    tri.v1 = Vec3::from(vt1);
+                    tri.v2 = Vec3::from(vt2);
+                    
+                    tri.n0 = nt0;
+                    tri.n1 = nt1;
+                    tri.n2 = nt2;
+
+                    // 4. Recalculer le centre pour le BVH
+                    tri.center = Vec3::new(
+                        (tri.v0.x + tri.v1.x + tri.v2.x) / 3.0,
+                        (tri.v0.y + tri.v1.y + tri.v2.y) / 3.0,
+                        (tri.v0.z + tri.v1.z + tri.v2.z) / 3.0,
+                    );
+                }
+            }
+        }
+    }
+
+
+    // Ce que le BVH et le traceur vont utiliser
+    #[allow(dead_code)]
+    pub struct Scene {
+        pub triangles: Vec<TriData>,
+        pub materials: Vec<MaterialRaytrace>, // Un catalogue de matériaux
+        pub bvh_nodes: Vec<BVHNode>,
+    }
+
+    #[allow(dead_code)]
+    impl Scene {
+        pub fn build(objets: Vec<Object>) -> Self {
+            let mut all_materials = Vec::new();
+            let mut all_triangles = Vec::new();
+
+            // 1. On aplatit les objets et on injecte les Material IDs
+            for (id, obj) in objets.into_iter().enumerate() {
+                all_materials.push(obj.material);
+                let current_mat_id = id as u32;
+
+                for mut tri in obj.triangles.into_iter() {
+                    tri.material_id = current_mat_id;
+                    all_triangles.push(tri);
+                }
+            }
+
+            // 2. Préparation pour le BVH
+            let mut bvh_nodes = Vec::new();
+            
+            // On appelle ta fonction qui va trier all_triangles en place
+            // et remplir le vecteur bvh_nodes.
+            // println!("Construction du BVH pour {} triangles...", all_triangles.len());
+            build_bvh(&mut all_triangles, &mut bvh_nodes, 0);
+
+            Scene {
+                triangles: all_triangles, // Ici, ils sont maintenant triés spatialement
+                materials: all_materials,
+                bvh_nodes,
+            }
+        }
+    }
+    
 
     // Structure retournée lors d'un impact
     #[allow(unused)]
@@ -1057,10 +1267,11 @@ pub mod raytrace {
         pub t: f32,
         pub normal: Vec3,
         pub hit_p: Vec3,
+        pub tri_index: usize
     }
 
     #[derive(Clone)]
-    struct BVHNode {
+    pub struct BVHNode {
         bbox_min: Vec3,
         bbox_max: Vec3,
         left_child: usize,
@@ -1084,121 +1295,36 @@ pub mod raytrace {
 
     // --- FONCTIONS DE CALCUL ---
 
-    // pub fn _do_transforms(all_triangles: Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)>, transforms: &Vec<&Transform>) -> Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)> {
-    //     let mut all_transformed_triangles: Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)> = Vec::new();
-    //     for t in all_triangles {
-    //         let p1: Point3d = (t.0.x, t.0.y, t.0.z);
-    //         let mut pt1: Point3d;
-    //         let p2: Point3d = (t.1.x, t.1.y, t.1.z);
-    //         let mut pt2: Point3d;
-    //         let p3: Point3d = (t.2.x, t.2.y, t.2.z);
-    //         let mut pt3: Point3d;
-    //         let mut nt1: Vec3;
-    //         let mut nt2: Vec3;
-    //         let mut nt3: Vec3;
-    //         if transforms.len() > 0 { 
-    //             pt1 = math_3d::Transform::transform_point(p1, &transforms[0]);
-    //             pt2 = math_3d::Transform::transform_point(p2, &transforms[0]);
-    //             pt3 = math_3d::Transform::transform_point(p3, &transforms[0]);
-    //             nt1 = math_3d::Transform::transform_vec3(t.3, &transforms[0]);
-    //             nt2 = math_3d::Transform::transform_vec3(t.4, &transforms[0]);
-    //             nt3 = math_3d::Transform::transform_vec3(t.5, &transforms[0]);
-    //             for t in transforms.iter().skip(1) {
-    //                 pt1 = math_3d::Transform::transform_point(pt1, t);
-    //                 pt2 = math_3d::Transform::transform_point(pt2, t);
-    //                 pt3 = math_3d::Transform::transform_point(pt3, t);
-    //                 nt1 = math_3d::Transform::transform_vec3(nt1, &t);
-    //                 nt2 = math_3d::Transform::transform_vec3(nt2, &t);
-    //                 nt3 = math_3d::Transform::transform_vec3(nt3, &t);
-    //             }
-    //         } else {
-    //             pt1 = p1;
-    //             pt2 = p2;
-    //             pt3 = p3;
-    //             nt1 = t.3;
-    //             nt2 = t.4;
-    //             nt3 = t.5;
-    //         }
-    //         all_transformed_triangles.push(
-    //             (Vec3 { x:pt1.0, y:pt1.1, z:pt1.2 },
-    //              Vec3 { x:pt2.0, y:pt2.1, z:pt2.2 },
-    //              Vec3 { x:pt3.0, y:pt3.1, z:pt3.2 },
-    //              nt1,
-    //              nt2,
-    //              nt3));
-    //     }
-    //     all_transformed_triangles
-    // }
-
-    pub fn get_triangles<'a, I>(triangles: I) -> Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)>
-    where 
-          I: Iterator<Item = [Vertex<'a>; 3]>
-       
-    {
-        triangles.filter_map(|f| {
-            // if f.len() < 3 { return None; }
-            let p0 = Vec3::new_from_point3d((f[0].position()[0], f[0].position()[1], f[0].position()[2]));
-            let p1 = Vec3::new_from_point3d((f[1].position()[0], f[1].position()[1], f[1].position()[2]));
-            let p2 = Vec3::new_from_point3d((f[2].position()[0], f[2].position()[1], f[2].position()[2]));
-
-            // let n = if let Some(n_exists) = f[0].normal() {
-            //     n_exists
-            // } else {
-            //     [0.0, 1.0, 0.0]
-            // };
-            // let n0 = Vec3 { x: n[0], y: n[1], z: n[2] };
-            // let n = if let Some(n_exists) = f[1].normal() {
-            //     n_exists
-            // } else {
-            //     [0.0, 1.0, 0.0]
-            // };
-            // let n1 = Vec3 { x: n[0], y: n[1], z: n[2] };
-            // let n = if let Some(n_exists) = f[2].normal() {
-            //     n_exists
-            // } else {
-            //     [0.0, 1.0, 0.0]
-            // };
-            // let n2 = Vec3 { x: n[0], y: n[1], z: n[2] };
+    pub fn get_obj<'a, I>(triangles: I, material: &MaterialRaytrace) -> Object
+    where I: Iterator<Item = [Vertex<'a>; 3]> {
+        let mut tris: Vec<TriData> = Vec::new();
+        for v in triangles {
+            let v0 = Vec3::new(v[0].position()[0], v[0].position()[1], v[0].position()[2]);
+            let v1 = Vec3::new(v[1].position()[0], v[1].position()[1], v[1].position()[2]); // Index 1
+            let v2 = Vec3::new(v[2].position()[0], v[2].position()[1], v[2].position()[2]); // Index 2
 
             // Fonction utilitaire locale pour extraire la normale ou une valeur par défaut
             let get_n = |v: &Vertex| {
                 let n = v.normal().unwrap_or([0.0, 1.0, 0.0]);
                 Vec3 { x: n[0], y: n[1], z: n[2] }
             };
-
-            let n0 = get_n(&f[0]);
-            let n1 = get_n(&f[1]);
-            let n2 = get_n(&f[2]);
-
             
-            Some((p0, p1, p2, n0, n1, n2))
-        }).collect()
-    }
-        
-    
+            let n0 = get_n(&v[0]);
+            let n1 = get_n(&v[1]);
+            let n2 = get_n(&v[2]);
+            let center = Vec3::new(
+                (v0.x + v1.x + v2.x) / 3.0,
+                (v0.y + v1.y + v2.y) / 3.0,
+                (v0.z + v1.z + v2.z) / 3.0,
+            );
 
-    pub fn do_transforms(all_triangles: Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)>, transforms: &[&Transform]) -> Vec<(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)> {
-        // L'itérateur parcourt le vecteur d'origine.
-        // Le map crée une version transformée de chaque triangle.
-        // Le collect alloue un nouvel espace mémoire et y place les nouveaux triangles.
-        // L'ancien vecteur est ensuite détruit (into_par_iter()) 
-        
-        all_triangles.into_par_iter().map(|(v0, v1, v2, n0, n1, n2)| {
-            // On réduit toutes les transformations en une seule application successive
-            transforms.iter().fold((v0, v1, v2, n0, n1, n2), |(p1, p2, p3, nt1, nt2, nt3), trans| {
-                (
-                    Vec3::from_point3d(Transform::transform_point(p1.to_point3d(), trans)),
-                    Vec3::from_point3d(Transform::transform_point(p2.to_point3d(), trans)),
-                    Vec3::from_point3d(Transform::transform_point(p3.to_point3d(), trans)),
-                    Transform::transform_vec3(nt1, trans),
-                    Transform::transform_vec3(nt2, trans),
-                    Transform::transform_vec3(nt3, trans),
-                )
-            })
-        }).collect()
+            let tri: TriData = TriData { v0, v1, v2, n0, n1, n2, center, material_id: 0};
+            tris.push(tri);
+        }
+        let o: Object = Object { triangles: tris, material: *material };
+        o
     }
 
-    
     
     fn intersect_aabb(origin: Vec3, dir: Vec3, min: Vec3, max: Vec3) -> bool {
         let inv_d = Vec3::new(1.0 / dir.x, 1.0 / dir.y, 1.0 / dir.z);
@@ -1269,6 +1395,7 @@ pub mod raytrace {
         node_idx
     }
 
+
     fn trace_bvh(nodes: &[BVHNode], triangles: &[TriData], node_idx: usize, 
                  origin: Vec3, dir: Vec3, t_min: f32, t_max: &mut f32) -> Option<HitInfo> {
         let node = &nodes[node_idx];
@@ -1277,25 +1404,38 @@ pub mod raytrace {
         if node.tri_count > 0 {
             let mut best_hit = None;
             for i in 0..node.tri_count {
-                let tri = &triangles[node.first_tri + i];
-                // On réutilise ton intersection barycentrique
+                // L'index réel dans le tableau global est (début du noeud + offset i)
+                let global_tri_idx = node.first_tri + i;
+                let tri = &triangles[global_tri_idx];
+
                 if let Some((t, u, v)) = intersect_triangle_barycentric(origin, dir, tri.v0, tri.v1, tri.v2) {
                     if t < *t_max && t > t_min {
                         *t_max = t;
                         let w = 1.0 - u - v;
+                        // Super : tu fais déjà l'interpolation des normales !
                         let normal = tri.n0.mul(w).add(tri.n1.mul(u)).add(tri.n2.mul(v)).normalize();
-                        best_hit = Some(HitInfo { t, normal, hit_p: origin.add(dir.mul(t)) });
+                        
+                        best_hit = Some(HitInfo { 
+                            t, 
+                            normal, 
+                            hit_p: origin.add(dir.mul(t)),
+                            tri_index: global_tri_idx, // <--- On sauve l'index ici !
+                        });
                     }
                 }
             }
             return best_hit;
         }
 
+        // --- Logique de parcours récursif ---
         let hit_l = trace_bvh(nodes, triangles, node.left_child, origin, dir, t_min, t_max);
         let hit_r = trace_bvh(nodes, triangles, node.right_child, origin, dir, t_min, t_max);
+        
+        // On retourne le hit de droite s'il existe (il aura mis à jour t_max), 
+        // sinon celui de gauche.
         hit_r.or(hit_l)
     }
-
+    
     pub fn intersect_triangle_barycentric(orig: Vec3, dir: Vec3, v0: Vec3, v1: Vec3, v2: Vec3) -> Option<(f32, f32, f32)> {
         let edge1 = v1.sub(v0);
         let edge2 = v2.sub(v0);
@@ -1314,16 +1454,16 @@ pub mod raytrace {
     }
 
     pub fn calculate_sky_color(direction: Vec3) -> (f32, f32, f32) {
+
+
         // Normalisation de direction.y entre 0.0 et 1.0
         let t = 0.5 * (direction.y + 1.0);
 
-        // Couleur A (Bas / Horizon) : Rouge
-        // RGB: (1.0, 0.05, 0.05)
-        let color_a = (1.0, 0.05, 0.05);
+        // Couleur A (Bas / Horizon)
+        let color_a = (0.4, 0.4, 0.4);
 
-        // Couleur B (Haut / Zénith) : Turquoise
-        // RGB: (0.0, 0.8, 0.8)
-        let color_b = (0.0, 0.8, 0.8);
+        // Couleur B (Haut / Zénith)
+        let color_b = (0.8, 0.8, 1.0);
 
         // Interpolation linéaire (Lerp)
         let r = (1.0 - t) * color_a.0 + t * color_b.0;
@@ -1331,206 +1471,164 @@ pub mod raytrace {
         let b = (1.0 - t) * color_a.2 + t * color_b.2;
 
         (r, g, b)
+
+       
+        // Fond noir
+        // (0.0, 0.0, 0.0)
+
+        // Test
+        // let y = direction.y; // de -1.0 (bas) à 1.0 (haut)
+        
+        // if y > 0.0 {
+        //     // Dégradé du blanc pur (soleil/softbox) vers un gris studio
+        //     let t = y.powi(2); 
+        //     (0.8 + 0.2 * t, 0.8 + 0.2 * t, 0.8 + 0.2 * t)
+        // } else {
+        //     // Sol gris foncé pour faire ressortir la base des sphères
+        //     (0.1, 0.1, 0.1)
+        // }
     }
 
-    
-    // --- RENDERER ---
-    // fn trace_scene(
-    //     origin: Vec3,
-    //     direction: Vec3,
-    //     bvh_nodes: &[BVHNode],
-    //     triangles: &[TriData],
-    //     light_dir: Vec3,
-    //     material: &MaterialRaytrace,
-    //     depth: u32,
-    // ) -> (f32, f32, f32) {
-    //     // Limite de récursion (pour éviter les boucles infinies entre miroirs)
-    //     if depth > 4 {
-    //         return (0.1, 0.1, 0.1); // Couleur ambiante de fond
-    //     }
-
-    //     let mut t_max = f32::MAX;
-    //     if let Some(hit) = trace_bvh(bvh_nodes, triangles, 0, origin, direction, 0.001, &mut t_max) {
-    //         let v = origin.sub(hit.hit_p).normalize();
-    //         let l = light_dir.normalize();
-            
-    //         // 1. Calcul de la lumière locale (Phong)
-    //         let local_intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
-
-    //         let mut final_color = local_intensity;
-
-    //         // 2. Gestion de la Réflexion (Miroir)
-    //         if material.reflectivity > 0.0 {
-    //             let reflect_dir = direction.reflect(hit.normal).normalize();
-    //             // On décale le point d'origine (epsilon) pour éviter l'auto-intersection
-    //             let reflect_origin = hit.hit_p.add(hit.normal.mul(0.001));
-                
-    //             let reflected_color = trace_scene(reflect_origin, reflect_dir, bvh_nodes, triangles, light_dir, material, depth + 1);
-                
-    //             final_color.0 = final_color.0 * (1.0 - material.reflectivity) + reflected_color.0 * material.reflectivity;
-    //             final_color.1 = final_color.1 * (1.0 - material.reflectivity) + reflected_color.1 * material.reflectivity;
-    //             final_color.2 = final_color.2 * (1.0 - material.reflectivity) + reflected_color.2 * material.reflectivity;
-    //         }
-
-    //         // 3. Gestion de la Transparence (Réfraction simple)
-    //         // if material.transparency > 0.0 {
-    //         //     // Pour simplifier, on tire un rayon tout droit (ou utilise refract() si tu l'as implémenté)
-    //         //     let refract_origin = hit.hit_p.sub(hit.normal.mul(0.001));
-    //         //     let refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
-
-    //         //     final_color.0 = final_color.0 * (1.0 - material.transparency) + refracted_color.0 * material.transparency;
-    //         //     final_color.1 = final_color.1 * (1.0 - material.transparency) + refracted_color.1 * material.transparency;
-    //         //     final_color.2 = final_color.2 * (1.0 - material.transparency) + refracted_color.2 * material.transparency;
-    //         // }
-
-    //         if material.transparency > 0.0 {
-    //             let refract_origin = hit.hit_p.sub(hit.normal.mul(0.001));
-    //             let refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
-
-    //             // 1. On garde le spéculaire (le petit reflet blanc brillant en surface)
-    //             // 2. On remplace le diffus par la couleur réfractée
-    //             final_color.0 = (final_color.0 * material.reflectivity) + (refracted_color.0 * material.transparency);
-    //             final_color.1 = (final_color.1 * material.reflectivity) + (refracted_color.1 * material.transparency);
-    //             final_color.2 = (final_color.2 * material.reflectivity) + (refracted_color.2 * material.transparency);
-                
-    //             // Si tu veux que l'objet colore la lumière qui le traverse (ex: verre rouge) :
-    //             // final_color.0 = refracted_color.0 * material.kd.0;
-    //         }
-
-    //         return final_color;
-    //     }
-
-    //     //(0.06, 0.06, 0.06) // Couleur du "vide" (noir grisâtre)
-    //     calculate_sky_color(direction)
-    // }
 
     fn trace_scene(
         origin: Vec3,
         direction: Vec3,
         bvh_nodes: &[BVHNode],
         triangles: &[TriData],
+        materials: &[MaterialRaytrace],
         light_dir: Vec3,
-        material: &MaterialRaytrace,
         depth: u32,
     ) -> (f32, f32, f32) {
-        // 1. Limite de récursion et ciel
         if depth > 4 {
             return calculate_sky_color(direction);
         }
 
         let mut t_max = f32::MAX;
         if let Some(hit) = trace_bvh(bvh_nodes, triangles, 0, origin, direction, 0.001, &mut t_max) {
-            let v = origin.sub(hit.hit_p).normalize();
+            let tri = &triangles[hit.tri_index];
+            let material = &materials[tri.material_id as usize];
+            
             let l = light_dir.normalize();
-            
-            // --- CALCUL DU FRESNEL ---
-            // Détermine si on regarde la face de biais ou de face
-            let view_dot_norm = direction.dot(hit.normal).abs();
-            let fresnel = (1.0 - view_dot_norm).powi(3); // Coefficient de réflexion sur les bords
+            let v = direction.neg().normalize(); // Vecteur vers la caméra
 
-            // --- GESTION DES REBONDS (REFLEXION) ---
-            let mut reflected_color = (0.0, 0.0, 0.0);
-            // On augmente la réflectivité naturelle par le fresnel
-            let effective_refl = material.reflectivity.max(fresnel * 0.5); 
-            
-            if effective_refl > 0.0 {
-                let reflect_dir = direction.reflect(hit.normal).normalize();
-                let reflect_origin = hit.hit_p.add(hit.normal.mul(0.001));
-                reflected_color = trace_scene(reflect_origin, reflect_dir, bvh_nodes, triangles, light_dir, material, depth + 1);
-            }
+            // --- 1. CALCUL DU FRESNEL (Schlick's approximation) ---
+            let cos_theta = v.dot(hit.normal).max(0.0);
+            let f0 = material.reflectivity; 
+            let fresnel = f0 + (1.0 - f0) * (1.0 - cos_theta).powi(5);
 
-            // --- GESTION DE LA TRANSPARENCE (REFRACTION) ---
+            // --- 2. RÉFLEXION ---
+            // Pour la réflexion (vers l'extérieur)
+            let reflect_origin = hit.hit_p.add(hit.normal.mul(0.005)); // Augmenté de 0.001 à 0.005
+            let reflect_dir = direction.reflect(hit.normal).normalize();
+            // let reflect_origin = hit.hit_p.add(hit.normal.mul(0.001));
+            let reflected_color = trace_scene(reflect_origin, reflect_dir, bvh_nodes, triangles, materials, light_dir, depth + 1);
+
+            // --- 3. RÉFRACTION (DÉVIATION) ---
             let mut refracted_color = (0.0, 0.0, 0.0);
-            let effective_trans = material.transparency * (1.0 - effective_refl);
 
-            if effective_trans > 0.0 {
-                let refract_origin = hit.hit_p.sub(hit.normal.mul(0.001));
-                // On tire tout droit pour l'instant (direction)
-                refracted_color = trace_scene(refract_origin, direction, bvh_nodes, triangles, light_dir, material, depth + 1);
+            if material.transparency > 0.0 {
+                let dot = direction.dot(hit.normal);
+                
+                // Si dot < 0, on entre dans l'objet (Air -> Verre)
+                // Si dot > 0, on sort de l'objet (Verre -> Air)
+                let (out_normal, eta) = if dot < 0.0 {
+                    (hit.normal, 1.0 / material.refractive_index)
+                } else {
+                    (hit.normal.neg(), material.refractive_index)
+                };
+
+                if let Some(refract_dir) = direction.refract(out_normal, eta) {
+                    // Décalage (bias) vers l'intérieur pour éviter de retoucher la même face
+                    let refract_origin = hit.hit_p.sub(out_normal.mul(0.005)); // Augmenté de 0.001 à 0.005
+                    refracted_color = trace_scene(refract_origin, refract_dir.normalize(), bvh_nodes, triangles, materials, light_dir, depth + 1);
+                } else {
+                    // Si la réfraction échoue (angle trop rasant), cela devient une réflexion
+                    let reflect_dir = direction.reflect(hit.normal).normalize();
+                    refracted_color = trace_scene(hit.hit_p.add(hit.normal.mul(0.001)), reflect_dir, bvh_nodes, triangles, materials, light_dir, depth + 1);
+                }
             }
 
-            // --- CALCUL DE L'INTENSITÉ LOCALE (PHONG) ---
+            // --- 4. ÉCLAIRAGE LOCAL (PHONG) ---
             let (r_local, g_local, b_local) = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
 
-            // --- MÉLANGE FINAL ---
-            // On sépare le spéculaire (éclat lumineux) du reste
-            let mut final_r = (reflected_color.0 * effective_refl) + (refracted_color.0 * effective_trans);
-            let mut final_g = (reflected_color.1 * effective_refl) + (refracted_color.1 * effective_trans);
-            let mut final_b = (reflected_color.2 * effective_refl) + (refracted_color.2 * effective_trans);
+            // --- 5. MÉLANGE FINAL (Conservation de l'énergie) ---
+            // On utilise le Fresnel pour doser entre Reflet et Réfraction
+            let kr = fresnel.clamp(0.0, 1.0); // Part réfléchie
+            let kt = (material.transparency * (1.0 - kr)).clamp(0.0, 1.0 - kr); // Part transmise
+            let kd = (1.0 - (kr + kt)).max(0.0); // Part diffuse ()
 
-            // On ajoute le spéculaire par-dessus pour la brillance (ks)
-            // Et un peu de diffus/ambiant si l'objet n'est pas totalement transparent
-            let opacity = 1.0 - effective_trans;
-            final_r += r_local * opacity;
-            final_g += g_local * opacity;
-            final_b += b_local * opacity;
+            let final_r = (reflected_color.0 * kr) + (refracted_color.0 * kt) + (r_local * kd);
+            let final_g = (reflected_color.1 * kr) + (refracted_color.1 * kt) + (g_local * kd);
+            let final_b = (reflected_color.2 * kr) + (refracted_color.2 * kt) + (b_local * kd);
 
             return (final_r, final_g, final_b);
         }
 
-        // Retourne le dégradé turquoise/rouge si rien n'est touché
         calculate_sky_color(direction)
     }
-    
-    
-    pub fn render_raytrace(
-        triangles: &[(Vec3, Vec3, Vec3, Vec3, Vec3, Vec3)], 
-        eye: (f32, f32, f32), target: Point3d,
-        light_dir: Vec3,
-        material: &MaterialRaytrace,
-        width: u32, height: u32,
+
+
+
+    pub fn render_scene_raytrace(
+        scene: &Scene, // On passe une référence pour ne pas "consommer" la scène
+        eye: (f32, f32, f32), 
+        target: Point3d, 
+        light_dir: Vec3, 
+        width: u32, 
+        height: u32, 
         fb: &mut FrameBuffer
     ) {
         let eye_vec = Vec3::new_from_point3d(eye);
         let target_vec = Vec3 { x: target.0, y: target.1, z: target.2 };
+        
         let forward = target_vec.sub(eye_vec).normalize();
+        // On utilise un vecteur UP mondial pour calculer la droite
         let right = forward.cross(Vec3 { x: 0.0, y: 1.0, z: 0.0 }).normalize();
         let up = right.cross(forward).normalize();
         let aspect_ratio = width as f32 / height as f32;
 
-        // 1. Préparation des données (TriData)
-        let mut triangles_data: Vec<TriData> = triangles.iter().map(|tri| {
-            let center = Vec3::new(
-                (tri.0.x + tri.1.x + tri.2.x) / 3.0,
-                (tri.0.y + tri.1.y + tri.2.y) / 3.0,
-                (tri.0.z + tri.1.z + tri.2.z) / 3.0,
-            );
-            TriData { v0: tri.0, v1: tri.1, v2: tri.2, n0: tri.3, n1: tri.4, n2: tri.5, center }
-        }).collect();
-
-        // 2. Construction du BVH
-        let mut bvh_nodes = Vec::with_capacity(triangles_data.len() * 2);
-        build_bvh(&mut triangles_data, &mut bvh_nodes, 0);
-
+        // Récupération des références vers les données de la scène
+        let triangles_data = &scene.triangles;
+        let bvh_nodes = &scene.bvh_nodes;
+        let materials = &scene.materials;
+        
+        // 3. Rendu Parallèle avec Rayon
         let mut image_data = vec![(16u8, 16u8, 16u8); (width * height) as usize];
+        
+        let samples_per_pixel = 16; // Plus c'est haut, plus c'est beau (mais plus lent)
 
-        // 3. Rendu Parallèle
         image_data.par_chunks_mut(width as usize).enumerate().for_each(|(y, row)| {
             for x in 0..width {
-                let px = (2.0 * ((x as f32 + 0.5) / width as f32) - 1.0) * aspect_ratio;
-                let py = 1.0 - 2.0 * ((y as f32 + 0.5) / height as f32);
-                let zoom = 3.5;
-                let ray_dir = forward.add(right.mul(px / zoom)).add(up.mul(py / zoom)).normalize();
+                let mut total_r = 0.0;
+                let mut total_g = 0.0;
+                let mut total_b = 0.0;
 
-                // Appel de la fonction récursive au lieu du simple trace_bvh
-                let color = trace_scene(
-                    eye_vec, 
-                    ray_dir, 
-                    &bvh_nodes, 
-                    &triangles_data, 
-                    light_dir, 
-                    material, 
-                    0
+                for _ in 0..samples_per_pixel {
+                    // Antialias ajout d'un petit décalage aléatoire entre -0.5 et 0.5
+                    let offset_x: f32 = rand::random::<f32>() - 0.5;
+                    let offset_y: f32 = rand::random::<f32>() - 0.5;
+
+                    let px = (2.0 * ((x as f32 + 0.5 + offset_x) / width as f32) - 1.0) * aspect_ratio;
+                    let py = 1.0 - 2.0 * ((y as f32 + 0.5 + offset_y) / height as f32);
+                    
+                    let zoom = 3.5;
+                    let ray_dir = forward.add(right.mul(px / zoom)).add(up.mul(py / zoom)).normalize();
+
+                    let color = trace_scene(eye_vec, ray_dir, bvh_nodes, triangles_data, materials, light_dir, 0);
+                    
+                    total_r += color.0;
+                    total_g += color.1;
+                    total_b += color.2;
+                }
+
+                // On fait la moyenne
+                let final_color = (
+                    total_r / samples_per_pixel as f32,
+                    total_g / samples_per_pixel as f32,
+                    total_b / samples_per_pixel as f32,
                 );
-                row[x as usize] = math_3d::utils::intensity_to_color(color);
-                
-                // let mut t_max = f32::MAX;
-                // if let Some(hit) = trace_bvh(&bvh_nodes, &triangles_data, 0, eye_vec, ray_dir, 0.001, &mut t_max) {
-                //     let v = eye_vec.sub(hit.hit_p).normalize();
-                //     let l = light_dir.normalize();
-                //     let intensity = math_3d::utils::calculate_intensity(hit.normal, l, v, &material.material);
-                //     row[x as usize] = math_3d::utils::intensity_to_color(intensity);
-                // }
+
+                row[x as usize] = math_3d::utils::intensity_to_color(final_color);
             }
         });
 
