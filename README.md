@@ -1,5 +1,5 @@
 # Gouraud:
 <img src="slayer3d.png">
 
-#Raytrace
+#Raytrace:
 <img src="slayer_r.png">
